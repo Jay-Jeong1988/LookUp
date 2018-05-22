@@ -1,0 +1,18 @@
+---
+:authentication:
+  :method: OAuth2
+  :oauth2_client_id: 672327777273-upfcv9jujk1nsdkbhqm617n5tdjkua0g.apps.googleusercontent.com
+  :oauth2_client_secret: AJ2cWlajzuXUD67h8LdueP8F
+  :developer_token: MeZfYyBf5Bc4mT8iTxhxNQ
+  :client_customer_id: 626-422-9001
+  :user_agent: INSERT_YOUR_USER_AGENT_HERE
+  :oauth2_token:
+    :access_token: ya29.Glu-BUJF4AXry4_tRU0vmC2N06YQjA5K8UHkhh_vWwPC4cMsHpILgmxego5JlD6kWdJMP8WEHJHIDFjcJfZFlGt28ebnJ9uZmxZCD-oiNN08gNTgkHz4s2eLOGUW
+    :refresh_token: 1/lcVPclTBfuG6W5u9oDIi9JkqTTY4Dszi9KwBRrtpBuw
+    :issued_at: 2018-05-17 02:12:08.235672000 -07:00
+    :expires_in: 3600
+    :id_token: 
+:connection:
+  :enable_gzip: false
+:library:
+  :log_level: INFO

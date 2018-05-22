@@ -1,0 +1,54 @@
+<style>
+    table {
+        width: 60%
+        }
+</style>
+
+<%= form_tag('/targeting_idea') do %>
+    <div style="display: flex" class="container m-5">
+    <%= label_tag :keyword %>
+    <%= text_field_tag :keyword%>
+    <%= select_tag "regions", 
+    options_for_select(@regions.map { |r| [r[:location][:location_name], r[:location][:id]] }), class: 'chosen-select' %>
+    <%= submit_tag 'search' %>
+    </div>
+<% end %>
+
+<div>
+<table style="text-align: center" class="container">
+    <tr>
+        <th>Keyword</th>
+        <th>Avg Search Volume</th>
+        <th>CPC</th>
+        <th>Competition</th>
+        <th>Monthly Graph</th>
+    </tr>
+<% @results.each do |r| %>
+    <tr>
+        <td><%= r[:data]['KEYWORD_TEXT'][:value].split[0] %></td>
+        <td><%= r[:data]['SEARCH_VOLUME'][:value] %></td>
+        <td><%= r[:data]['AVERAGE_CPC'][:value][:micro_amount] %></td>
+        <td style="padding-top: 15px; display:flex; justify-content: center"><div style="border-radius: 100px; width: 50px; height: 40px; color: white; background-color: <%= colorize_competition((r[:data]['COMPETITION'][:value] * 100).to_i) %> "><p><%= (r[:data]['COMPETITION'][:value] * 100).to_i %></p></div></td>
+        <% @monthly_volume = [] %>
+        <%  r[:data]['TARGETED_MONTHLY_SEARCHES'][:value].each do |m| %>
+            <% @monthly_volume << ["#{m[:year].to_s.split(//).last(2).join}'#{m[:month]}", m[:count]] %>
+            <% end %>
+        <% @monthly_volume.reverse! %>
+        <% remove_axis = { scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        display: false
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        display: false
+                                    }
+                                }]
+                            }
+                        } %>
+        <td><div class="container d-flex justify-content-center"><%= column_chart @monthly_volume, width: "100px", height: "45px", library: remove_axis %></div></td>
+    </tr>
+</div>
+
+<% end %>
